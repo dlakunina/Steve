@@ -38,7 +38,7 @@ public class Application {
      */
     public static void main(String[] args) {
         ProfileController profileController = new ProfileController();
-        profileController.showProfile(1);
+        profileController.showProfile(51);
         /*changeState(new StateIdle(), "idle");
         String testCommand = "test command";
         currentState.onCommand(testCommand);
