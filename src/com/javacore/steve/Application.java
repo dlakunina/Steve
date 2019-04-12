@@ -1,7 +1,8 @@
 package com.javacore.steve;
 
-import com.javacore.steve.command.ACommand;
-import com.javacore.steve.command.CommandRegistry;
+import com.javacore.steve.profile.ProfileController;
+import com.javacore.steve.state.ApplicationState;
+
 
 /**
  * The Application class is a CLI for the project com.javacore.steve. "Steve" is a programme, modelling some activities
@@ -9,7 +10,6 @@ import com.javacore.steve.command.CommandRegistry;
  * topics, such as weather, music preferences, news, etc...
  * So far the program supports two commands: CommandAuthor and CommandVersion, which are described in the corresponding
  * classes.
- *
  *
  * @author dasha
  * @version 0.0.0
@@ -29,13 +29,30 @@ public class Application {
      * the field VERSION stores the version data
      */
     static public final String VERSION = "0.0.0";
+    static ApplicationState currentState;
 
     /**
      * The main entry point function.
+     *
      * @param args the arguments of the programme.
      */
     public static void main(String[] args) {
-        System.out.println("Hello, my name is " + APP_NAME);
+        ProfileController profileController = new ProfileController();
+        profileController.showProfile(1);
+        /*changeState(new StateIdle(), "idle");
+        String testCommand = "test command";
+        currentState.onCommand(testCommand);
+
+        //      for (int i = 0; i < 10; i++) {
+        //        currentState.onCommand(commandName + i);
+        // }
+
+        //or maybe
+        for (String commandName : args) {
+            currentState.onCommand(commandName);
+        }
+
+      /*  System.out.println("Hello, my name is " + APP_NAME);
         //System.out.println("my author is " + AUTHOR);
         for (String commandName : args) {
             ACommand command = CommandRegistry.INSTANCE.getCommand(commandName);
@@ -52,7 +69,17 @@ public class Application {
 
             }*/
 
+
     }
+
+    public static void changeState(ApplicationState newState, String commandName) {
+        if (currentState != null) {
+            currentState.exit();
+        }
+        currentState = newState;
+        currentState.enter(commandName);
+    }
+
 
 }
 
