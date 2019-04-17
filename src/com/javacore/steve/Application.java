@@ -1,7 +1,11 @@
 package com.javacore.steve;
 
-import com.javacore.steve.profile.ProfileController;
+import com.javacore.steve.common.ConsoleCanvas;
+import com.javacore.steve.db.Table;
 import com.javacore.steve.state.ApplicationState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -37,8 +41,77 @@ public class Application {
      * @param args the arguments of the programme.
      */
     public static void main(String[] args) {
-        ProfileController profileController = new ProfileController();
-        profileController.showProfile(51);
+        List<String> columns = new ArrayList<>();
+        columns.add("id");
+        columns.add("lastName");
+        columns.add("firstName");
+
+        Table criminalTable = new Table ("Criminals", columns);
+
+        List<String> values = new ArrayList<>();
+
+        values.add("1");
+        values.add("Vladimir");
+        values.add("Trump");
+        Record criminal = new Record(values);
+        criminalTable.insert(new Record(values));
+        List<string> result = criminalTable.selectField("id")
+
+
+        ConsoleCanvas canvas = new ConsoleCanvas((15, 15));
+        canvas.setSymbolAt();
+        canvas.drawCircleAt();
+        canvas.drawSquareAt();
+        canvas.draw();
+
+
+
+
+
+
+
+
+
+        Runnable runnable1 = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    System.out.print(".");
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+
+                    }
+                }
+                System.out.println("done");
+            }
+
+        };
+        System.out.print("\nLoading");
+        thread.start();
+    }
+
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    System.out.print(".");
+                }
+                try {
+                    Thread.sleep(100);
+                    System.out.println(this.getState());
+                } catch (InterruptedException e) {
+                }
+                System.out.println(this.getState());
+            }
+
+
+        };
+        (new Thread(runnable1)).start();
+        thread.start();
+       // ProfileController profileController = new ProfileController();
+        //profileController.showProfile(51);
         /*changeState(new StateIdle(), "idle");
         String testCommand = "test command";
         currentState.onCommand(testCommand);
@@ -70,7 +143,7 @@ public class Application {
             }*/
 
 
-    }
+    };
 
     public static void changeState(ApplicationState newState, String commandName) {
         if (currentState != null) {
