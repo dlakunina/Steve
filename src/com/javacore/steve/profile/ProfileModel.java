@@ -1,18 +1,42 @@
 package com.javacore.steve.profile;
 
 import com.javacore.steve.common.BaseModel;
+import com.javacore.steve.db.Record;
+
+import java.util.Date;
 
 public class ProfileModel extends BaseModel {
     private int id;
     private String firstName;
     private String lastName;
-    private boolean active;
+    private String nickname;
+    private int numberOfCrimes;
+    private Date dateOfBirth;
+    private Boolean active;
+    private Boolean deceased;
+
 
     public ProfileModel(int id, String firstName, String lastName, boolean active) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.active = active;
+    }
+
+    public ProfileModel() {
+    }
+
+    ;
+
+    public static ProfileModel modelFromRecord(Record record) {
+        ProfileModel model = new ProfileModel();
+        try {
+            model.setId(record.getInt("id"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return model;
     }
 
     public static ProfileModel randomModel() {
@@ -57,6 +81,11 @@ public class ProfileModel extends BaseModel {
 
     public String getName() {
         return firstName + " " + lastName;
+    }
+
+    public ProfileModel setDeceased(boolean deceased) {
+        this.deceased = deceased;
+        return this;
     }
 
 }
